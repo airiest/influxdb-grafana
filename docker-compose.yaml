@@ -25,5 +25,6 @@ services:
     depends_on:
       - influxdb
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ./grafana/data:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/grafana.ini
     restart: always
