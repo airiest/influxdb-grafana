@@ -21,7 +21,7 @@ $ python test.py
 
 ![](./doc/panel_setup.png)
 
-## inlux shell
+## influx shell
 ```
 $ docker exec -it influxdb bash
 root@xxx:/# influx -username user -password password
