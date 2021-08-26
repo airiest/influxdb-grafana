@@ -1,6 +1,7 @@
 import threading
 import time
 import random
+import numpy
 from datetime import datetime
 from influxdb import InfluxDBClient
 
@@ -12,7 +13,7 @@ class TestInflux():
         port = 8086
         user = "user"
         passwd = "password"
-        db = "dbname"
+        db = "my_db"
         self.__client = InfluxDBClient(host, port, user, passwd, db)
 
         self.__thread = threading.Thread(target=self.__woker, args=())
@@ -21,8 +22,11 @@ class TestInflux():
 
     def __woker(self):
         while True:
-            tim = datetime.utcnow()
-            tag = {"tag": "tagname"}
+            dt = numpy.datetime64(datetime.utcnow(), 'ns')
+            tim = dt.astype('uint64')
+
+            tag = {"tag": "tag_name"}
+
             val = {}
             for unit_id in range(1, 10, 1):
                 val.update([("unit_" + str(unit_id), random.randint(0, 1))])
@@ -51,7 +55,7 @@ class TestInflux():
         msglist = [msg]
 
         try:
-            self.__client.write_points(msglist)
+            self.__client.write_points(msglist, time_precision='n')
         except Exception:
             print("influxdb write error: {}".format(msglist))
 

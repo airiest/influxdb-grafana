@@ -9,7 +9,7 @@ services:
       INFLUXDB_ADMIN_PASSWORD: admin
       INFLUXDB_USER: user
       INFLUXDB_USER_PASSWORD: password
-      INFLUXDB_DB: dbname
+      INFLUXDB_DB: my_db
     volumes:
       - ./influxdb/data:/var/lib/influxdb
     ports:
