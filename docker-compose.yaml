@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   influxdb:
-    image: influxdb:1.8
+    image: influxdb:1.12
     container_name: influxdb
     environment:
       INFLUXDB_HTTP_AUTH_ENABLED: "true"
